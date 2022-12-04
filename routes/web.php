@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,8 @@ use App\Http\Controllers\TestController;
 //     return view('welcome');
 // });
 
-Route::get('/',[TestController::class,'index']);
+Route::get('/',[FrontendController::class,'index']);
+Route::get('/shop',[FrontendController::class,'shop']);
 // Route::get('/',[App\Http\Controllers\TestController::class,'index']);
 
 
