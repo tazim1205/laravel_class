@@ -21,6 +21,5 @@ use App\Http\Controllers\FrontendController;
 
 Route::get('/',[FrontendController::class,'index']);
 Route::get('/shop',[FrontendController::class,'shop']);
-// Route::get('/',[App\Http\Controllers\TestController::class,'index']);
 
 
