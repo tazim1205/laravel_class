@@ -17,4 +17,32 @@ class FrontendController extends Controller
     {
         return view('Frontend.User.shop');
     }
+
+    //shopDetails
+
+    public function shopDetails()
+    {
+        return view('Frontend.User.shopDetails');
+    }
+        
+    //cart
+
+    public function cart()
+    {
+        return view('Frontend.User.cart');
+    }
+    
+    //checkout
+
+    public function checkout()
+    {
+        return view('Frontend.User.checkout');
+    }
+
+    //contact
+
+    public function contact()
+    {
+        return view('Frontend.User.contact');
+    }
 }
