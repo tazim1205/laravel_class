@@ -21,6 +21,10 @@ use App\Http\Controllers\FrontendController;
 
 Route::get('/',[FrontendController::class,'index']);
 Route::get('/shop',[FrontendController::class,'shop']);
+Route::get('/shopDetails',[FrontendController::class,'shopDetails']);
+Route::get('/cart',[FrontendController::class,'cart']);
+Route::get('/checkout',[FrontendController::class,'checkout']);
+Route::get('/contact',[FrontendController::class,'contact']);
 // Route::get('/',[App\Http\Controllers\TestController::class,'index']);
 
 
