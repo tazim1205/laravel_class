@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\RegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,7 @@ Route::get('/shopDetails',[FrontendController::class,'shopDetails']);
 Route::get('/cart',[FrontendController::class,'cart']);
 Route::get('/checkout',[FrontendController::class,'checkout']);
 Route::get('/contact',[FrontendController::class,'contact']);
+Route::get('/regitration_from',[RegistrationController::class,'create']);
+Route::post('/regitration_store',[RegistrationController::class,'store']);
 
 
