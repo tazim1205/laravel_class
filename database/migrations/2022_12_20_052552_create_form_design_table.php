@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStudentInfoTable extends Migration
+class CreateFormDesignTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateStudentInfoTable extends Migration
      */
     public function up()
     {
-        Schema::create('student_info', function (Blueprint $table) {
+        Schema::create('form_design', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('student_name',100);
             $table->string('fathers_name',100);
             $table->string('mothers_name',100);
-            $table->longText('address')->nullable();
+            $table->longtext('address')->nullable();
             $table->double('fees',10,2);
             $table->integer('status')->comment(' 0 = inactive , 1 = Active');
             $table->timestamps();
@@ -32,6 +32,6 @@ class CreateStudentInfoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student_info');
+        Schema::dropIfExists('form_design');
     }
 }

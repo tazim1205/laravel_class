@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Models\student_info;
 
 class RegistrationController extends Controller
 {
@@ -30,7 +31,20 @@ class RegistrationController extends Controller
         // ]);
 
 
-        $insert = DB::table('student_info')->insert($request->except('_token'));
+        // $insert = DB::table('student_info')->insert($request->except('_token'));
+
+        $validated = $request->validate([
+            'student_name' => 'required|unique:student_infos',
+            'fathers_name' => 'required', 
+            'mothers_name' => 'required', 
+            'fees' => 'required', 
+            'status' => 'required', 
+        ],[
+            'student_name.required'=>'ছাত্র/ছাত্রীর নাম দিন',
+            'student_name.unique'=>'এই নাম দ্বারা রেজিষ্ট্রেশন সম্পন্ন হয়েছে',
+        ]);
+
+        $insert = student_info::create($request->except('_token'));
 
 
         if($insert)
