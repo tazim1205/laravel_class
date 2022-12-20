@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\FormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,9 @@ Route::get('/contact',[FrontendController::class,'contact']);
 
 Route::get('/registration_form',[RegistrationController::class,'create']);
 Route::post('/registration_store',[RegistrationController::class,'store']);
+
+Route::get('/std_form',[FormController::class,'create']);
+Route::post('/form_store',[FormController::class,'store']);
+
 
 
