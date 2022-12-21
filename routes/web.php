@@ -31,6 +31,10 @@ Route::get('/contact',[FrontendController::class,'contact']);
 
 Route::get('/registration_form',[RegistrationController::class,'create']);
 Route::post('/registration_store',[RegistrationController::class,'store']);
+Route::get('/view_data',[RegistrationController::class,'index']);
+Route::get('/edit_data/{id}',[RegistrationController::class,'edit']);
+Route::post('/registration_update/{id}',[RegistrationController::class,'update']);
+Route::get('/delete_data/{id}',[RegistrationController::class,'delete']);
 
 Route::get('/std_form',[FormController::class,'create']);
 Route::post('/form_store',[FormController::class,'store']);

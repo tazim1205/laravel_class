@@ -8,6 +8,18 @@ use App\Models\student_info;
 
 class RegistrationController extends Controller
 {
+    public function index()
+    {
+        // query builder
+        // $data = DB::table('student_infos')->get();
+
+        // orm 
+        $data = student_info::all();
+
+        $sl = 1;
+        // return $data;
+        return view('Frontend.Registration.index',compact('data','sl'));
+    }
     public function create()
     {
         return view('Frontend.Registration.create');
@@ -49,7 +61,7 @@ class RegistrationController extends Controller
 
         if($insert)
         {
-            return redirect()->back()->with('success','Data Insert Successfully');
+            return redirect('/view_data')->with('success','Data Insert Successfully');
         }
         else
         {
@@ -59,5 +71,66 @@ class RegistrationController extends Controller
 
 
         //elequent orm
+    }
+
+    public function edit($id)
+    {
+        // quer bulider
+        // $data = DB::table('student_infos')->where('id',$id)->first();
+        
+
+        // orm 
+        $data = student_info::find($id);
+
+        // return $data;
+        
+        return view('Frontend.Registration.edit',compact('data'));
+    }
+
+    public function update(Request $request,$id)
+    {
+        $validated = $request->validate([
+            'student_name' => 'required',
+            'fathers_name' => 'required', 
+            'mothers_name' => 'required', 
+            'fees' => 'required', 
+            'status' => 'required', 
+        ],[
+            'student_name.required'=>'ছাত্র/ছাত্রীর নাম দিন',
+            // 'student_name.unique'=>'এই নাম দ্বারা রেজিষ্ট্রেশন সম্পন্ন হয়েছে',
+        ]);
+
+        // query builder
+        // $update = DB::table('student_infos')->where('id',$id)->update($request->except('_token'));
+
+        //orm
+        $update = student_info::find($id)->update($request->except('_token'));
+
+        if($update)
+        {
+            return redirect()->back()->with('success','Data Update Successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Data Update Unsuccessfull');
+        }
+    }
+
+    public function delete($id)
+    {
+        // query builder
+        $delete = DB::table('student_infos')->where('id',$id)->delete();
+
+        //orm
+        // $delete = student_info::find($id)->delete();
+
+        if($delete)
+        {
+            return redirect()->back()->with('success','Data Delete Successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Data Delete Unsuccessfull');
+        }
     }
 }
