@@ -99,6 +99,9 @@ body{
     margin-right: 125px;
 
 }
+.is-invalid{
+	border: 1px solid red;
+}
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
 
@@ -110,6 +113,15 @@ body{
   <body>
     <!-- Body of Form starts -->
   	<div class="container">
+	  <!-- @if ($errors->any())
+			<div class="alert alert-danger">
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
+		@endif -->
 	  @if(Session::get('success'))
             <div class="alert alert-success alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button> 
@@ -136,7 +148,10 @@ body{
           </div>
     			<div class="fr">
     					<input type="text" name="name" placeholder=" Name"
-              class="textBox" autofocus="on" required>
+              class="textBox @error('name') is-invalid @enderror" autofocus="on" value="{{old('name')}}">
+			  @error('name')
+				<div class="alert alert-danger">{{ $message }}</div>
+			@enderror
     			</div>
     			<div class="clr"></div>
     		</div>
@@ -148,8 +163,11 @@ body{
           <label for="secondName" class="fl fontLabel">Father Name: </label>
     			<div class="fl iconBox"><i class="fa fa-user" aria-hidden="true"></i></div>
     			<div class="fr">
-    					<input type="text" required name="father_name"
-              placeholder="Father Name" class="textBox">
+    					<input type="text"  name="father_name"
+              placeholder="Father Name" class="textBox @error('father_name') is-invalid @enderror"  value="{{old('father_name')}}">
+			  @error('father_name')
+				<div class="alert alert-danger">{{ $message }}</div>
+			@enderror
     			</div>
     			<div class="clr"></div>
     		</div>
@@ -159,8 +177,11 @@ body{
           <label for="secondName" class="fl fontLabel">Mother Name: </label>
     			<div class="fl iconBox"><i class="fa fa-user" aria-hidden="true"></i></div>
     			<div class="fr">
-    					<input type="text" required name="mother_name"
-              placeholder="Mother Name" class="textBox">
+    					<input type="text"  name="mother_name"
+              placeholder="Mother Name" class="textBox @error('mother_name') is-invalid @enderror"  value="{{old('mother_name')}}">
+			  @error('mother_name')
+				<div class="alert alert-danger">{{ $message }}</div>
+			@enderror
     			</div>
     			<div class="clr"></div>
     		</div>
@@ -172,7 +193,10 @@ body{
           <label for="phone" class="fl fontLabel"> Phone No.: </label>
     			<div class="fl iconBox"><i class="fa fa-phone-square" aria-hidden="true"></i></div>
     			<div class="fr">
-    					<input type="text" required name="phone" maxlength="10" placeholder="Phone No." class="textBox ">
+    					<input type="text"  name="phone" maxlength="10" placeholder="Phone No." class="textBox @error('phone') is-invalid @enderror "  value="{{old('phone')}}">
+						@error('phone')
+				<div class="alert alert-danger">{{ $message }}</div>
+			@enderror
     			</div>
     			<div class="clr"></div>
     		</div>
@@ -184,7 +208,10 @@ body{
           <label for="email" class="fl fontLabel"> Email ID: </label>
     			<div class="fl iconBox"><i class="fa fa-envelope" aria-hidden="true"></i></div>
     			<div class="fr">
-    					<input type="email" required name="email" placeholder="Email Id" class="textBox">
+    					<input type="email"  name="email" placeholder="Email Id" class="textBox @error('email') is-invalid @enderror"  value="{{old('email')}}">
+						@error('email')
+				<div class="alert alert-danger">{{ $message }}</div>
+			@enderror
     			</div>
     			<div class="clr"></div>
     		</div>
@@ -204,15 +231,15 @@ body{
     		<!---Gender----->
     		<!-- <div class="box radio">
           <label for="gender" class="fl fontLabel"> Gender: </label>
-    				<input type="radio" name="Gender" value="Male" required> Male &nbsp; &nbsp; &nbsp; &nbsp;
-    				<input type="radio" name="Gender" value="Female" required> Female
+    				<input type="radio" name="Gender" value="Male" > Male &nbsp; &nbsp; &nbsp; &nbsp;
+    				<input type="radio" name="Gender" value="Female" > Female
     		</div> -->
     		<!---Gender--->
 
 
     		<!--Terms and Conditions------>
     		<!-- <div class="box terms">
-    				<input type="checkbox" name="Terms" required> &nbsp; I accept the terms and conditions
+    				<input type="checkbox" name="Terms" > &nbsp; I accept the terms and conditions
     		</div> -->
     		<!--Terms and Conditions------>
 
