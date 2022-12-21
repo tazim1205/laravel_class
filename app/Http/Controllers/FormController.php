@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Models\form_design;
 
 class FormController extends Controller
 {
@@ -32,10 +33,23 @@ class FormController extends Controller
 
         // $insert = DB::table('form_design')->insert($request->except('_token'));
 
-        
+        $validated = $request->validate([
+            'student_name' => 'required|unique:form_designs',
+            'fathers_name' => 'required', 
+            'mothers_name' => 'required', 
+            'fees' => 'required', 
+            'status' => 'required', 
+        ],[
+            'student_name.required'=>'ছাত্র/ছাত্রীর নাম দিন',
+            'student_name.unique'=>'এই নাম দ্বারা রেজিষ্ট্রেশন সম্পন্ন হয়েছে',
+            'fathers_name.required'=>'পিতার নাম দিন',
+            'mothers_name.required'=>'মাতার নাম দিন',
+            'fees.required'=>'ফিস উল্লেখ করুন',
+            'status.required'=>'স্টেটাস দিন',
+        ]);
 
+        $insert = form_design::create($request->except('_token'));
         
-
 
         if($insert)
         {

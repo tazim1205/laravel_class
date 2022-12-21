@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFormDesignTable extends Migration
+class CreateFormDesignsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFormDesignTable extends Migration
      */
     public function up()
     {
-        Schema::create('form_design', function (Blueprint $table) {
+        Schema::create('form_designs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('student_name',100);
             $table->string('fathers_name',100);
@@ -32,6 +32,6 @@ class CreateFormDesignTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('form_design');
+        Schema::dropIfExists('form_designs');
     }
 }
