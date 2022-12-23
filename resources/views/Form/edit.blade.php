@@ -42,39 +42,39 @@
                     <strong>{{Session::get('info')}}</strong>
             </div>
             @endif
-        <form action="{{url('form_store')}}" method="post">
+        <form action="{{url('form_update')}}/{{$data->id}}" method="post">
             <h2 class="text-center">Student Form</h2>
                 <a href="{{url('/view_form')}}" class="btn btn-info">View Data</a>
             @csrf
             <div class="row jumbotron">
                 <div class="col-sm-6 form-group">
                     <label>Name</label>
-                    <input type="text" class="form-control @error('student_name') is-invalid @enderror" name="student_name" value="{{ old('student_name') }}">
+                    <input type="text" class="form-control @error('student_name') is-invalid @enderror" name="student_name" value="{{ $data->student_name }}">
                     @error('student_name')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-sm-6 form-group">
                     <label>Fathers Name</label>
-                    <input type="text" class="form-control @error('fathers_name') is-invalid @enderror" name="fathers_name" value="{{ old('fathers_name') }}">
+                    <input type="text" class="form-control @error('fathers_name') is-invalid @enderror" name="fathers_name" value="{{ $data->fathers_name }}">
                     @error('fathers_name')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-sm-6 form-group">
                     <label>Mothers Name</label>
-                    <input type="text" class="form-control @error('mothers_name') is-invalid @enderror" name="mothers_name" value="{{ old('mothers_name') }}">
+                    <input type="text" class="form-control @error('mothers_name') is-invalid @enderror" name="mothers_name" value="{{ $data->mothers_name }}">
                     @error('mothers_name')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-sm-6 form-group">
                     <label>Address</label>
-                    <textarea class="form-control" name="address">{{ old('address') }}</textarea>
+                    <textarea class="form-control" name="address">{!! $data->address !!}</textarea>
                 </div>
                 <div class="col-sm-6 form-group">
                     <label>Fees</label>
-                    <input type="text" class="form-control @error('fees') is-invalid @enderror" name="fees" value="{{ old('fees') }}">
+                    <input type="text" class="form-control @error('fees') is-invalid @enderror" name="fees" value="{{ $data->fees }}">
                     @error('fees')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -83,8 +83,8 @@
                     <label>Status</label>
                     <select class="form-control" name="status">
                         <option value="">Select One</option>
-                        <option {{old('status') === '1' ? 'selected' : ''}} value="1">Active</option>
-                        <option {{old('status') === '0' ? 'selected' : ''}} value="0">Inactive</option>
+                        <option @if($data->status == 1) selected @endif value="1">Active</option>
+                        <option @if($data->status == 0) selected @endif value="0">Inactive</option>
                     </select>
                     @error('status')
                 <div class="alert alert-danger">{{ $message }}</div>
