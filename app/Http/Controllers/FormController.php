@@ -8,6 +8,20 @@ use App\Models\form_design;
 
 class FormController extends Controller
 {
+    public function index()
+    {
+        // query builder
+        // $data = DB::table('form_designs')->get();
+
+        // orm
+        $data = form_design::all();
+        // get
+
+        $sl = 1;
+
+        return view('Form.index',compact('data','sl'));
+    }
+    
     public function create()
     {
         return view('Form.create');
@@ -53,7 +67,7 @@ class FormController extends Controller
 
         if($insert)
         {
-            return redirect()->back()->with('success', 'Data Insert Successfully');
+            return redirect('/view_form')->with('success', 'Data Insert Successfully');
         }
         else
         {
@@ -62,5 +76,70 @@ class FormController extends Controller
 
 
         // Elequent Orm
+    }
+
+    // edit
+    public function edit($id)
+    {
+        // query builder
+        // $data = DB::table('form_designs')->where('id',$id)->first();
+
+        // orm
+        $data = form_design::find($id);
+
+        return view('Form.edit',compact('data'));
+    }
+
+    // update
+    public function update(Request $request,$id)
+    {
+        $validated = $request->validate([
+            'student_name' => 'required',
+            'fathers_name' => 'required', 
+            'mothers_name' => 'required', 
+            'fees' => 'required', 
+            'status' => 'required', 
+        ],[
+            'student_name.required'=>'ছাত্র/ছাত্রীর নাম দিন',
+            'student_name.unique'=>'এই নাম দ্বারা রেজিষ্ট্রেশন সম্পন্ন হয়েছে',
+            'fathers_name.required'=>'পিতার নাম দিন',
+            'mothers_name.required'=>'মাতার নাম দিন',
+            'fees.required'=>'ফিস উল্লেখ করুন',
+            'status.required'=>'স্টেটাস দিন',
+        ]);
+
+        // query builder
+        // $update = DB::table('form_designs')->where('id',$id)->update($request->except('_token'));
+
+        // orm
+        $update = form_design::find($id)->update($request->except('_token'));
+
+        if($update)
+        {
+            return redirect()->back()->with('success', 'Data Update Successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error', 'Data Update Unsuccessfull');
+        }
+    }
+    
+    // delete
+    public function delete($id)
+    {
+        // query builder
+        $delete = DB::table('form_designs')->where('id',$id)->delete();
+
+        // orm
+        // $delete = form_design::find($id)->delete();
+
+        if($delete)
+        {
+            return redirect()->back()->with('success', 'Data Delete Successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error', 'Data Delete Unsuccessfull');
+        }
     }
 }
