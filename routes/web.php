@@ -40,9 +40,9 @@ Route::get('/delete_data/{id}',[RegistrationController::class,'delete']);
 Route::get('/std_form',[FormController::class,'create']);
 Route::post('/form_store',[FormController::class,'store']);
 Route::get('/view_form',[FormController::class,'index']);
-Route::get('/edit_data/{id}',[FormController::class,'edit']);
+// Route::get('/edit_data/{id}',[FormController::class,'edit']);
 Route::post('/form_update/{id}',[FormController::class,'update']);
-Route::get('/delete_data/{id}',[FormController::class,'delete']);
+// Route::get('/delete_data/{id}',[FormController::class,'delete']);
 
 
 

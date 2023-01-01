@@ -57,7 +57,7 @@
                     <strong>{{Session::get('info')}}</strong>
             </div>
             @endif
-                <form action="{{url('registration_store')}}" method="post">
+                <form action="{{url('registration_store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-lg-6">
@@ -111,6 +111,15 @@
                                     <option {{old('status') === '0' ? 'selected' : ''}}  value="0">Inactive</option>
                                 </select>
                                 @error('status')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-single-box">
+                                <label>Fees</label>
+                                <input type="file" class="form-control" name="image" value="{{ old('image') }}">
+                                @error('image')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>

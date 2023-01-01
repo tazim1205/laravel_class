@@ -43,8 +43,7 @@ class RegistrationController extends Controller
         // ]);
 
 
-        // $insert = DB::table('student_info')->insert($request->except('_token'));
-
+        
         $validated = $request->validate([
             'student_name' => 'required|unique:student_infos',
             'fathers_name' => 'required', 
@@ -55,8 +54,27 @@ class RegistrationController extends Controller
             'student_name.required'=>'ছাত্র/ছাত্রীর নাম দিন',
             'student_name.unique'=>'এই নাম দ্বারা রেজিষ্ট্রেশন সম্পন্ন হয়েছে',
         ]);
+        
+        // $insert = DB::table('student_infos')->insertGetId($request->except('_token'));
 
         $insert = student_info::create($request->except('_token'));
+
+
+        $file = $request->file('image');
+
+        $id = $insert->id;
+
+        if($file)
+        {
+            $imageName = rand().'.'.$file->getClientOriginalExtension();
+
+            $file->move(public_path().'/Frontend/studentImage/',$imageName);
+
+            DB::table('student_infos')->where('id',$id)->update(['image'=>$imageName]);
+
+        }
+
+
 
 
         if($insert)
@@ -81,6 +99,9 @@ class RegistrationController extends Controller
 
         // orm 
         $data = student_info::find($id);
+        
+
+        // return $data;
 
         // return $data;
         
@@ -104,7 +125,34 @@ class RegistrationController extends Controller
         // $update = DB::table('student_infos')->where('id',$id)->update($request->except('_token'));
 
         //orm
-        $update = student_info::find($id)->update($request->except('_token'));
+        $file = $request->file('image');
+
+        if($file)
+        {
+            $pathImage = student_info::find($id);
+
+            $path = public_path().'/Frontend/studentImage/'.$pathImage->image;
+
+            if(file_exists($path))
+            {
+                unlink($path);
+            }
+
+        }
+
+        if($file)
+        {
+            $imageName = rand().'.'.$file->getClientOriginalExtension();
+
+            $file->move(public_path().'/Frontend/studentImage/',$imageName);
+
+            DB::table('student_infos')->where('id',$id)->update(['image'=>$imageName]);
+
+        }
+
+
+        $update = student_info::find($id)->update($request->except('_token','image'));
+
 
         if($update)
         {
@@ -119,6 +167,16 @@ class RegistrationController extends Controller
     public function delete($id)
     {
         // query builder
+
+        $pathImage = student_info::find($id);
+
+        $path = public_path().'/Frontend/studentImage/'.$pathImage->image;
+
+        if(file_exists($path))
+        {
+            unlink($path);
+        }
+
         $delete = DB::table('student_infos')->where('id',$id)->delete();
 
         //orm
