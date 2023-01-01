@@ -76,6 +76,7 @@
                                 <th>Adress</th>
                                 <th>Fees</th>
                                 <th>Status</th>
+                                <th>Image</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -99,6 +100,11 @@
                                         inactive
                                     </div>
                                     @endif
+                                </td>
+                                <td>
+                                    <img src="{{asset('/Frontend/studentImage')}}/{{$v->image}}" alt="" height="80px" width="80px">
+
+                                    <!-- <iframe src="{{asset('/Frontend/studentImage')}}/{{$v->image}}" height="200" width="300"></iframe> -->
                                 </td>
                                 <td>
                                     <a href="{{url('/edit_data')}}/{{$v->id}}" class="btn btn-info">Edit</a>

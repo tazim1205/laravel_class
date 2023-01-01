@@ -57,7 +57,7 @@
                     <strong>{{Session::get('info')}}</strong>
             </div>
             @endif
-                <form action="{{url('registration_update')}}/{{$data->id}}" method="post">
+                <form action="{{url('registration_update')}}/{{$data->id}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-lg-6">
@@ -114,6 +114,16 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-single-box">
+                                <label>Fees</label>
+                                <input type="file" class="form-control" name="image" value="{{ old('image') }}">
+                                @error('image')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <img src="{{asset('/Frontend/studentImage')}}/{{$data->image}}" alt="" height="80px" width="80px">
                         </div>
                         <div class="col-lg-6">
                             <div class="input-single-box">
