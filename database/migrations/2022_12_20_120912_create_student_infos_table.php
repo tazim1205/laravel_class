@@ -14,13 +14,13 @@ class CreateStudentInfosTable extends Migration
     public function up()
     {
         Schema::create('student_infos', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('father_name');
-            $table->string('mother_name');
-            $table->string('phone');
-            $table->string('email');
+            $table->bigIncrements('id');
+            $table->string('student_name',100);
+            $table->string('fathers_name',100);
+            $table->string('mothers_name',100);
             $table->longText('address')->nullable();
+            $table->double('fees',10,2);
+            $table->integer('status')->comment(' 0 = inactive , 1 = Active');
             $table->timestamps();
         });
     }

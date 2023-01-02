@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\FormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,17 @@ Route::get('/checkout',[FrontendController::class,'checkout']);
 Route::get('/contact',[FrontendController::class,'contact']);
 Route::get('/regitration_from',[RegistrationController::class,'create']);
 Route::post('/regitration_store',[RegistrationController::class,'store']);
+
+
+Route::get('/registration_form',[RegistrationController::class,'create']);
+Route::post('/registration_store',[RegistrationController::class,'store']);
+Route::get('/view_data',[RegistrationController::class,'index']);
+Route::get('/edit_data/{id}',[RegistrationController::class,'edit']);
+Route::post('/registration_update/{id}',[RegistrationController::class,'update']);
+Route::get('/delete_data/{id}',[RegistrationController::class,'delete']);
+
+Route::get('/std_form',[FormController::class,'create']);
+Route::post('/form_store',[FormController::class,'store']);
+
 
 

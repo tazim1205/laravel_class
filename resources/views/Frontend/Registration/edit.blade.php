@@ -57,13 +57,13 @@
                     <strong>{{Session::get('info')}}</strong>
             </div>
             @endif
-                <form action="{{url('/registration_store')}}" method="post">
+                <form action="{{url('registration_update')}}/{{$data->id}}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="input-single-box">
                                 <label>Name</label>
-                                <input type="text" class="form-control @error('student_name') is-invalid @enderror" name="student_name" value="{{ old('student_name') }}">
+                                <input type="text" class="form-control @error('student_name') is-invalid @enderror" name="student_name" value="{{ $data->student_name }}">
                                 @error('student_name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -72,7 +72,7 @@
                         <div class="col-lg-6">
                             <div class="input-single-box">
                                 <label>Fathers Name</label>
-                                <input type="text" class="form-control" name="fathers_name" value="{{ old('fathers_name') }}">
+                                <input type="text" class="form-control" name="fathers_name" value="{{ $data->fathers_name }}">
                                 @error('fathers_name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -81,7 +81,7 @@
                         <div class="col-lg-6">
                             <div class="input-single-box">
                                 <label>Mothers Name</label>
-                                <input type="text" class="form-control" name="mothers_name" value="{{ old('mothers_name') }}">
+                                <input type="text" class="form-control" name="mothers_name" value="{{ $data->mothers_name }}">
                                 @error('mothers_name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -90,13 +90,13 @@
                         <div class="col-lg-6">
                             <div class="input-single-box">
                                 <label>Address</label>
-                                <textarea class="form-control" name="address">{{ old('address') }}</textarea>
+                                <textarea class="form-control" name="address">{!! $data->address !!}</textarea>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="input-single-box">
                                 <label>Fees</label>
-                                <input type="text" class="form-control" name="fees" value="{{ old('fees') }}">
+                                <input type="text" class="form-control" name="fees" value="{{ $data->fees }}">
                                 @error('fees')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -107,8 +107,8 @@
                                 <label>Status</label>
                                 <select class="form-select" name="status">
                                     <option value=" ">Select One</option>
-                                    <option {{old('status') === '1' ? 'selected' : ''}}  value="1">Active</option>
-                                    <option {{old('status') === '0' ? 'selected' : ''}}  value="0">Inactive</option>
+                                    <option @if($data->status == 1) selected @endif  value="1">Active</option>
+                                    <option @if($data->status == 0) selected @endif  value="0">Inactive</option>
                                 </select>
                                 @error('status')
                                     <div class="alert alert-danger">{{ $message }}</div>

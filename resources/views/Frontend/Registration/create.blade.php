@@ -57,7 +57,7 @@
                     <strong>{{Session::get('info')}}</strong>
             </div>
             @endif
-                <form action="{{url('/registration_store')}}" method="post">
+                <form action="{{url('registration_store')}}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-lg-6">
