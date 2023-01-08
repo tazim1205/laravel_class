@@ -42,7 +42,7 @@
                     <strong>{{Session::get('info')}}</strong>
             </div>
             @endif
-        <form action="{{url('form_store')}}" method="post">
+        <form action="{{url('form_store')}}" method="post" enctype="multipart/form-data">
             <h2 class="text-center">Student Form</h2>
                 <a href="{{url('/view_form')}}" class="btn btn-info">View Data</a>
             @csrf
@@ -87,11 +87,18 @@
                         <option {{old('status') === '0' ? 'selected' : ''}} value="0">Inactive</option>
                     </select>
                     @error('status')
-                <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Image</label>
+                    <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}">
+                    @error('image')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 
-                <div class="col-lg-6">
+                <div class="col-sm-6 form-group">
                     <div class="input-single-box">
                         <input type="submit" class="btn btn-success" value="Submit">
                     </div>

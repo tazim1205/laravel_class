@@ -42,7 +42,7 @@
                     <strong>{{Session::get('info')}}</strong>
             </div>
             @endif
-        <form action="{{url('form_update')}}/{{$data->id}}" method="post">
+        <form action="{{url('form_update')}}/{{$data->id}}" method="post" enctype="multipart/form-data">
             <h2 class="text-center">Student Form</h2>
                 <a href="{{url('/view_form')}}" class="btn btn-info">View Data</a>
             @csrf
@@ -89,6 +89,14 @@
                     @error('status')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Image</label>
+                    <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}">
+                    @error('image')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    <img src="{{asset('/Frontend/formimage')}}/{{$data->image}}" alt="" height="80px" width="80px">
                 </div>
                 
                 <div class="col-lg-6">

@@ -5,6 +5,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\StdController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,20 +30,22 @@ Route::get('/checkout',[FrontendController::class,'checkout']);
 Route::get('/contact',[FrontendController::class,'contact']);
 
 // class
-Route::get('/registration_form',[RegistrationController::class,'create']);
-Route::post('/registration_store',[RegistrationController::class,'store']);
-Route::get('/view_data',[RegistrationController::class,'index']);
-Route::get('/edit_data/{id}',[RegistrationController::class,'edit']);
-Route::post('/registration_update/{id}',[RegistrationController::class,'update']);
-Route::get('/delete_data/{id}',[RegistrationController::class,'delete']);
+// Route::get('/registration_form',[RegistrationController::class,'create']);
+// Route::post('/registration_store',[RegistrationController::class,'store']);
+// Route::get('/view_data',[RegistrationController::class,'index']);
+// Route::get('/edit_data/{id}',[RegistrationController::class,'edit']);
+// Route::post('/registration_update/{id}',[RegistrationController::class,'update']);
+// Route::get('/delete_data/{id}',[RegistrationController::class,'delete']);
+
+// Route::resource('student',StdController::class);
 
 // tazim
 Route::get('/std_form',[FormController::class,'create']);
 Route::post('/form_store',[FormController::class,'store']);
 Route::get('/view_form',[FormController::class,'index']);
-// Route::get('/edit_data/{id}',[FormController::class,'edit']);
+Route::get('/edit_data/{id}',[FormController::class,'edit']);
 Route::post('/form_update/{id}',[FormController::class,'update']);
-// Route::get('/delete_data/{id}',[FormController::class,'delete']);
+Route::get('/delete_data/{id}',[FormController::class,'delete']);
 
 
 

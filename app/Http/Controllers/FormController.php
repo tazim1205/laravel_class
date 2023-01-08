@@ -62,7 +62,24 @@ class FormController extends Controller
             'status.required'=>'স্টেটাস দিন',
         ]);
 
+        
+        // $insert = DB::table('form_designs')->insertGetId($request->except('_token'));
+        
         $insert = form_design::create($request->except('_token'));
+
+        $file = $request->file('image');
+
+        $id = $insert->id;
+        
+        if($file)
+        {
+            $imageName = rand().'.'.$file->getClientOriginalExtension();
+            
+            $file->move(public_path().'/Frontend/formimage/',$imageName);
+            
+            DB::table('form_designs')->where('id',$id)->update(['image'=>$imageName]);
+        }
+        
         
 
         if($insert)
@@ -112,8 +129,33 @@ class FormController extends Controller
         // $update = DB::table('form_designs')->where('id',$id)->update($request->except('_token'));
 
         // orm
-        $update = form_design::find($id)->update($request->except('_token'));
+        
+        $file = $request->file('image');
+        
+        if($file)
+        {
+            $pathImage = form_design::find($id);
 
+            $path = public_path().'/Frontend/formimage/'.$pathImage->image;
+
+            if(file_exists($path))
+            {
+                unlink($path);
+            }
+        }
+
+        if($file)
+        {
+            $imageName = rand().'.'.$file->getClientOriginalExtension();
+            
+            $file->move(public_path().'/Frontend/formimage/',$imageName);
+            
+            DB::table('form_designs')->where('id',$id)->update(['image'=>$imageName]);
+        }
+        
+        $update = form_design::find($id)->update($request->except('_token','image'));
+
+        
         if($update)
         {
             return redirect()->back()->with('success', 'Data Update Successfully');
@@ -128,6 +170,16 @@ class FormController extends Controller
     public function delete($id)
     {
         // query builder
+
+        $pathImage = form_design::find($id);
+
+        $path = public_path().'/Frontend/formimage/'.$pathImage->image;
+
+        if(file_exists($path))
+        {
+            unlink($path);
+        }
+
         $delete = DB::table('form_designs')->where('id',$id)->delete();
 
         // orm
