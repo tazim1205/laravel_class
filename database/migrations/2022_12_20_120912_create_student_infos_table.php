@@ -19,8 +19,8 @@ class CreateStudentInfosTable extends Migration
             $table->string('fathers_name',100);
             $table->string('mothers_name',100);
             $table->longText('address')->nullable();
-            $table->double('fees',10,2);
-            $table->integer('status')->comment(' 0 = inactive , 1 = Active');
+            $table->double('fees',10,2)->nullable();
+            $table->integer('status')->comment(' 0 = inactive , 1 = Active')->default('1');
             $table->timestamps();
         });
     }
